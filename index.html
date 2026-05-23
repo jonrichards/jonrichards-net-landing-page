@@ -16,7 +16,98 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Jon Richards - Enterprise Architect">
     <meta name="twitter:description" content="Enterprise Architect for digital commerce and retail. Cloud, CI/CD, AI agents, microservices, cybersecurity. Engineering and tech leadership background.">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1e1e1e;
+            color: #76FF03;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.875;
+        }
+
+        a,
+        a:visited {
+            color: #0099ff;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #90CAF9;
+            text-decoration: underline;
+        }
+
+        a:focus-visible {
+            outline: 2px solid #76FF03;
+            outline-offset: 2px;
+        }
+
+        ::selection {
+            background: #76FF03;
+            color: #1e1e1e;
+        }
+
+        .console {
+            padding: 10px;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        #lastlogin,
+        #command1,
+        #command2,
+        #command3 {
+            color: #5cc702;
+        }
+
+        #lastlogin:empty {
+            display: none;
+        }
+
+        #response1,
+        #response2 {
+            color: #5cc702;
+            margin-left: 20px;
+        }
+
+        .prompt {
+            font-weight: bold;
+            color: #76FF03;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .cursor {
+            display: inline;
+            color: #4a9d02;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cursor {
+                animation: none;
+            }
+        }
+    </style>
     <link rel="icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180.png">
     <script type="application/ld+json">
@@ -63,7 +154,7 @@
             <p>Find me on <a href="https://www.linkedin.com/in/jon-richards-7b117b1a" target="_blank" rel="noopener noreferrer">LinkedIn</a> or <a href="https://github.com/jonrichards" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
         </noscript>
     </main>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>

@@ -73,6 +73,7 @@ p {
 
 .cursor {
     display: inline;
+    color: #4a9d02;
     animation: blink 1s step-end infinite;
 }
 

@@ -6,10 +6,9 @@ Built with vanilla HTML, CSS, and JavaScript. Hosted on AWS Amplify, which auto-
 
 ## Files
 
-- `index.html` — page markup, SEO/Open Graph metadata, JSON-LD `Person` schema, and the static no-JS fallback content.
-- `script.js` — typewriter animation, dynamic "Last login" banner, and the idle skill cycle (reads from JSON-LD `knowsAbout` so the page has a single source of truth for expertise areas).
-- `styles.css` — terminal-style colors, cursor animation, and `prefers-reduced-motion` handling.
-- `favicon.ico` — site icon.
+- `index.html` — page markup with inlined CSS (terminal palette, responsive padding, cursor animation, `prefers-reduced-motion` handling), SEO/Open Graph metadata, JSON-LD `Person` schema, and the static no-JS fallback content.
+- `script.js` — typewriter animation with humanized cadence, dynamic "Last login" banner, and the idle skill cycle (reads from JSON-LD `knowsAbout` so the page has a single source of truth for expertise areas).
+- `favicon.svg`, `favicon-32.png`, `favicon-180.png` — site icons.
 
 ## Local preview
 

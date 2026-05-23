@@ -1,4 +1,4 @@
-const PROMPT_HTML = '<span class="prompt">jon@richards:~$</span> ';
+const PROMPT_HTML = '<span class="prompt">jon@richards</span><span class="dim">:</span><span class="path">~</span><span class="dim">$</span> ';
 const INITIAL_PAUSE_MS = 600;
 const MIN_TYPE_SPEED_MS = 50;
 const MAX_TYPE_SPEED_MS = 250;
@@ -39,7 +39,6 @@ async function typeCommand(elementId, command) {
     const element = document.getElementById(elementId);
     const cursor = document.createElement('span');
     cursor.className = 'cursor';
-    cursor.textContent = '█';
     element.innerHTML = PROMPT_HTML;
     element.appendChild(cursor);
     if (command) {

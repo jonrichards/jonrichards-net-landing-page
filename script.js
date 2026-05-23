@@ -1,11 +1,9 @@
 const PROMPT_HTML = '<span class="prompt">jon-richards-net$</span> ';
-const INITIAL_PAUSE_MS = 1250;
+const INITIAL_PAUSE_MS = 600;
 const MIN_TYPE_SPEED_MS = 50;
 const MAX_TYPE_SPEED_MS = 250;
 
-const REDUCED_MOTION = typeof window !== 'undefined'
-    && typeof window.matchMedia === 'function'
-    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function sleep(ms) {
     if (REDUCED_MOTION) return Promise.resolve();
@@ -21,6 +19,8 @@ function appendLinks(parent, linksArray) {
         const a = document.createElement('a');
         a.href = link.url;
         a.title = link.title;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
         a.textContent = link.name;
         parent.appendChild(a);
     }
@@ -69,12 +69,3 @@ async function typeCommand(elementId, command) {
 
     await typeCommand('command3', '');
 })();
-
-if (typeof exports !== 'undefined') {
-    module.exports = {
-        sleep,
-        getRandomInteger,
-        appendLinks,
-        typewriterEffect
-    };
-}

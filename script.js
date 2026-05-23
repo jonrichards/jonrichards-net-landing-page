@@ -74,6 +74,19 @@ function shuffled(arr) {
     return a;
 }
 
+function whenVisible() {
+    if (!document.hidden) return Promise.resolve();
+    return new Promise(resolve => {
+        const handler = () => {
+            if (!document.hidden) {
+                document.removeEventListener('visibilitychange', handler);
+                resolve();
+            }
+        };
+        document.addEventListener('visibilitychange', handler);
+    });
+}
+
 async function cycleSkillsForever(elementId) {
     const skills = getSkillsFromJsonLd().map(s => s.toLowerCase().replace(/[\s/]+/g, '-'));
     if (skills.length === 0) return;
@@ -91,6 +104,7 @@ async function cycleSkillsForever(elementId) {
 
     while (true) {
         for (const token of shuffled(skills)) {
+            await whenVisible();
             for (const char of token) {
                 typed.textContent += char;
                 await sleep(getRandomInteger(MIN_TYPE_SPEED_MS, MAX_TYPE_SPEED_MS));

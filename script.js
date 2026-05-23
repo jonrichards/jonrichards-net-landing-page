@@ -1,4 +1,4 @@
-const PROMPT_HTML = '<span class="prompt">jon-richards-net$</span> ';
+const PROMPT_HTML = '<span class="prompt">jon@richards:~$</span> ';
 const INITIAL_PAUSE_MS = 600;
 const MIN_TYPE_SPEED_MS = 50;
 const MAX_TYPE_SPEED_MS = 250;
@@ -38,13 +38,20 @@ async function typeCommand(elementId, command) {
     const element = document.getElementById(elementId);
     const cursor = document.createElement('span');
     cursor.className = 'cursor';
-    cursor.textContent = '|';
+    cursor.textContent = '█';
     element.innerHTML = PROMPT_HTML;
     element.appendChild(cursor);
     if (command) {
         await typewriterEffect(command, element, cursor);
         element.removeChild(cursor);
     }
+}
+
+function formatLastLogin() {
+    const d = new Date();
+    const dayMonth = d.toDateString().split(' ').slice(0, 3).join(' ');
+    const time = d.toTimeString().slice(0, 8);
+    return `Last login: ${dayMonth} ${time} on ttys001`;
 }
 
 (async () => {
@@ -58,6 +65,8 @@ async function typeCommand(elementId, command) {
     for (const id of ['command1', 'response1', 'command2', 'response2', 'command3']) {
         document.getElementById(id).textContent = '';
     }
+
+    document.getElementById('lastlogin').textContent = formatLastLogin();
 
     await typeCommand('command1', 'whoami');
     document.getElementById('response1').textContent = 'Jon Richards';

@@ -48,8 +48,8 @@ async function typewriterEffect(inputString, elementId, cursor) {
     const command2 = 'ls -G';
     const element3 = 'command3';
     const links = [
-        { name: 'LinkedIn', url: 'https://www.linkedin.com', title: 'LinkedIn' },
-        { name: 'GitHub', url: 'https://www.github.com', title: 'GitHub' }
+        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/jon-richards-7b117b1a', title: 'LinkedIn' },
+        { name: 'GitHub', url: 'https://github.com/jonrichards', title: 'GitHub' }
     ];
 
     // Create a cursor element for the first command line interface element

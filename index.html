@@ -21,64 +21,72 @@
         content="Enterprise Architect for retail and digital commerce — composable architecture, generative AI and agents, platform engineering, and CI/CD at scale.">
     <style>
         body {
-            font-family: 'Courier New', monospace;
-            background-color: #1e1e1e;
-            color: #76FF03;
+            font-family: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+            background-color: #0e0f10;
+            color: #cfcfca;
             margin: 0;
-            padding: 20px;
+            padding: 56px 64px;
             line-height: 1.875;
         }
 
         a,
         a:visited {
-            color: #0099ff;
+            color: #6aa5f0;
             padding-right: 10px;
             text-decoration: none;
         }
 
         a:hover {
-            color: #90CAF9;
+            color: #8fbcf5;
             text-decoration: underline;
         }
 
         a:focus-visible {
-            outline: 2px solid #76FF03;
+            outline: 2px solid #86c986;
             outline-offset: 2px;
         }
 
         ::selection {
-            background: #76FF03;
-            color: #1e1e1e;
-        }
-
-        .console {
-            padding: 10px;
+            background: rgba(134, 201, 134, 0.22);
+            color: #cfcfca;
         }
 
         p {
             margin: 0;
         }
 
-        #lastlogin,
-        #command1,
-        #command2,
-        #command3 {
-            color: #5cc702;
+        #lastlogin {
+            color: #5d9b5d;
         }
 
         #lastlogin:empty {
             display: none;
         }
 
+        #command1,
+        #command2,
+        #command3,
         #response1,
         #response2 {
-            color: #5cc702;
+            color: #cfcfca;
+        }
+
+        #response1,
+        #response2 {
             margin-left: 20px;
         }
 
         .prompt {
             font-weight: bold;
-            color: #76FF03;
+            color: #86c986;
+        }
+
+        .dim {
+            color: #7a7a76;
+        }
+
+        .path {
+            color: #6aa5f0;
         }
 
         .visually-hidden {
@@ -94,9 +102,14 @@
         }
 
         .cursor {
-            display: inline;
-            color: #4a9d02;
-            animation: blink 1s step-end infinite;
+            display: inline-block;
+            width: 0.62em;
+            height: 1.05em;
+            background-color: #86c986;
+            box-shadow: 0 0 12px #86c986;
+            vertical-align: text-bottom;
+            transform: translateY(-0.15em);
+            animation: blink 1s steps(1) infinite;
         }
 
         @keyframes blink {
@@ -174,13 +187,13 @@
         <h1 class="visually-hidden">Jon Richards</h1>
         <section class="console">
             <p id="lastlogin"></p>
-            <p id="command1"><span class="prompt">jon@richards:~$</span> whoami</p>
+            <p id="command1"><span class="prompt">jon@richards</span><span class="dim">:</span><span class="path">~</span><span class="dim">$</span> whoami</p>
             <p id="response1">Jon Richards</p>
-            <p id="command2"><span class="prompt">jon@richards:~$</span> ls -G</p>
+            <p id="command2"><span class="prompt">jon@richards</span><span class="dim">:</span><span class="path">~</span><span class="dim">$</span> ls -G</p>
             <p id="response2"><a href="https://www.linkedin.com/in/jon-richards-7b117b1a" title="LinkedIn"
                     target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/jonrichards"
                     title="GitHub" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-            <p id="command3"><span class="prompt">jon@richards:~$</span></p>
+            <p id="command3"><span class="prompt">jon@richards</span><span class="dim">:</span><span class="path">~</span><span class="dim">$</span></p>
         </section>
         <noscript>
             <p>Find me on <a href="https://www.linkedin.com/in/jon-richards-7b117b1a" target="_blank"

@@ -30,7 +30,7 @@ a:hover {
     text-decoration: underline;
 }
 
-console {
+.console {
     padding: 10px;
 }
 
@@ -50,7 +50,7 @@ p {
     margin-left: 20px;
 }
 
-prompt {
+.prompt {
     font-weight: bold;
 }
 
@@ -66,9 +66,7 @@ prompt {
     border: 0;
 }
 
-.cursor1,
-.cursor2,
-.cursor3 {
+.cursor {
     display: inline;
     animation: blink 1s step-end infinite;
 }
@@ -76,5 +74,11 @@ prompt {
 @keyframes blink {
     50% {
         opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cursor {
+        animation: none;
     }
 }

@@ -61,7 +61,7 @@ function formatLastLogin() {
     const d = new Date();
     const dayMonth = d.toDateString().split(' ').slice(0, 3).join(' ');
     const time = d.toTimeString().slice(0, 8);
-    return `Last login: ${dayMonth} ${time} on ttys001`;
+    return `Last login: ${dayMonth} ${time}<span class="tty"> on ttys001</span>`;
 }
 
 function getSkillsFromJsonLd() {
@@ -140,7 +140,7 @@ async function cycleSkillsForever(elementId) {
         document.getElementById(id).textContent = '';
     }
 
-    document.getElementById('lastlogin').textContent = formatLastLogin();
+    document.getElementById('lastlogin').innerHTML = formatLastLogin();
 
     await typeCommand('command1', 'whoami');
     await sleep(POST_COMMAND_PAUSE_MS);

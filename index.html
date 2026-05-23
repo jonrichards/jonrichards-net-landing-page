@@ -20,13 +20,20 @@
     <meta name="twitter:description"
         content="Enterprise Architect for retail and digital commerce — composable architecture, generative AI and agents, platform engineering, and CI/CD at scale.">
     <style>
+        html {
+            background-color: #0e0f10;
+            color-scheme: dark;
+        }
+
         body {
             font-family: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', Menlo, Consolas, 'Liberation Mono', monospace;
             background-color: #0e0f10;
             color: #cfcfca;
             margin: 0;
-            padding: 56px 64px;
+            padding: clamp(24px, 4vw, 56px) clamp(20px, 5vw, 64px);
             line-height: 1.875;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
         a,
@@ -115,6 +122,12 @@
         @keyframes blink {
             50% {
                 opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tty {
+                display: none;
             }
         }
 

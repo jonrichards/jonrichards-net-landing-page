@@ -1,6 +1,6 @@
 body {
     font-family: 'Courier New', monospace;
-    background-color: #333333;
+    background-color: #1e1e1e;
     color: #76FF03;
     margin: 0;
     padding: 20px;
@@ -19,6 +19,16 @@ a:hover {
     text-decoration: underline;
 }
 
+a:focus-visible {
+    outline: 2px solid #76FF03;
+    outline-offset: 2px;
+}
+
+::selection {
+    background: #76FF03;
+    color: #1e1e1e;
+}
+
 .console {
     padding: 10px;
 }
@@ -27,20 +37,26 @@ p {
     margin: 0;
 }
 
+#lastlogin,
 #command1,
 #command2,
 #command3 {
-    color: #76FF03;
+    color: #5cc702;
+}
+
+#lastlogin:empty {
+    display: none;
 }
 
 #response1,
 #response2 {
-    color: #76FF03;
+    color: #5cc702;
     margin-left: 20px;
 }
 
 .prompt {
     font-weight: bold;
+    color: #76FF03;
 }
 
 .visually-hidden {

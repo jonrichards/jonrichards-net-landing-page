@@ -1,7 +1,10 @@
 const PROMPT_HTML = '<span class="prompt">jon@richards</span><span class="dim">:</span><span class="path">~</span><span class="dim">$</span> ';
 const INITIAL_PAUSE_MS = 600;
-const MIN_TYPE_SPEED_MS = 50;
-const MAX_TYPE_SPEED_MS = 250;
+const TYPE_MIN_MS = 40;
+const TYPE_MAX_MS = 85;
+const TYPE_PAUSE_MIN_MS = 135;
+const TYPE_PAUSE_MAX_MS = 240;
+const TYPE_PAUSE_CHANCE = 0.12;
 const POST_COMMAND_PAUSE_MS = 350;
 
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -13,6 +16,13 @@ function sleep(ms) {
 
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
+}
+
+function humanizedTypeDelay() {
+    if (Math.random() < TYPE_PAUSE_CHANCE) {
+        return getRandomInteger(TYPE_PAUSE_MIN_MS, TYPE_PAUSE_MAX_MS);
+    }
+    return getRandomInteger(TYPE_MIN_MS, TYPE_MAX_MS);
 }
 
 function appendLinks(parent, linksArray) {
@@ -31,7 +41,7 @@ async function typewriterEffect(inputString, element, cursor) {
     await sleep(INITIAL_PAUSE_MS);
     for (const char of inputString) {
         element.insertBefore(document.createTextNode(char), cursor);
-        await sleep(getRandomInteger(MIN_TYPE_SPEED_MS, MAX_TYPE_SPEED_MS));
+        await sleep(humanizedTypeDelay());
     }
 }
 
@@ -106,7 +116,7 @@ async function cycleSkillsForever(elementId) {
             await whenVisible();
             for (const char of token) {
                 typed.textContent += char;
-                await sleep(getRandomInteger(MIN_TYPE_SPEED_MS, MAX_TYPE_SPEED_MS));
+                await sleep(humanizedTypeDelay());
             }
             await sleep(READ_PAUSE_MS);
             while (typed.textContent.length > 0) {

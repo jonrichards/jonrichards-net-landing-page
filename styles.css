@@ -4,18 +4,7 @@ body {
     color: #76FF03;
     margin: 0;
     padding: 20px;
-    line-height: 30px;
-}
-
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    /* add this to make the pseudo-element behind the body content */
+    line-height: 1.875;
 }
 
 a,

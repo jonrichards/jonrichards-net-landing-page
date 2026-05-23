@@ -1,105 +1,80 @@
-// Define a function that returns a promise that resolves after a given number of milliseconds
+const PROMPT_HTML = '<span class="prompt">jon-richards-net$</span> ';
+const INITIAL_PAUSE_MS = 1250;
+const MIN_TYPE_SPEED_MS = 50;
+const MAX_TYPE_SPEED_MS = 250;
+
+const REDUCED_MOTION = typeof window !== 'undefined'
+    && typeof window.matchMedia === 'function'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 function sleep(ms) {
+    if (REDUCED_MOTION) return Promise.resolve();
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Define a function that returns a random integer between a minimum and maximum value
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-// Define a function that generates HTML links from an array of link objects
-function generateLinks(linksArray) {
-    let linksHTML = '';
-
+function appendLinks(parent, linksArray) {
     for (const link of linksArray) {
-        const { name, url, title } = link;
-        const linkHTML = `<a href="${url}" title="${title}">${name}</a>`;
-        linksHTML += linkHTML;
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.title = link.title;
+        a.textContent = link.name;
+        parent.appendChild(a);
     }
-
-    return linksHTML;
 }
 
-// Define an async function that simulates a typewriter effect by adding characters to an HTML element one at a time
-async function typewriterEffect(inputString, elementId, cursor) {
+async function typewriterEffect(inputString, element, cursor) {
+    await sleep(INITIAL_PAUSE_MS);
+    for (const char of inputString) {
+        element.insertBefore(document.createTextNode(char), cursor);
+        await sleep(getRandomInteger(MIN_TYPE_SPEED_MS, MAX_TYPE_SPEED_MS));
+    }
+}
+
+async function typeCommand(elementId, command) {
     const element = document.getElementById(elementId);
-    const min_speed = 50;
-    const max_speed = 250;
-
-    // Wait for a short period of time before starting the typewriter effect
-    await sleep(max_speed * 5);
-
-    // Add each character of the input string to the HTML element one at a time
-    for (let i = 0; i < inputString.length; i++) {
-        const char = document.createTextNode(inputString.charAt(i));
-        element.insertBefore(char, cursor);
-        await sleep(getRandomInteger(min_speed, max_speed));
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    cursor.textContent = '|';
+    element.innerHTML = PROMPT_HTML;
+    element.appendChild(cursor);
+    if (command) {
+        await typewriterEffect(command, element, cursor);
+        element.removeChild(cursor);
     }
 }
 
-// Define an immediately invoked async function expression that simulates a command line interface
 (async () => {
-    // Define some variables for the command line interface
-    const prompt = '<prompt>jon-richards-net$</prompt> ';
-    const element1 = 'command1';
-    const command1 = 'whoami';
-    const element2 = 'command2';
-    const command2 = 'ls -G';
-    const element3 = 'command3';
     const links = [
         { name: 'LinkedIn', url: 'https://www.linkedin.com/in/jon-richards-7b117b1a', title: 'LinkedIn' },
         { name: 'GitHub', url: 'https://github.com/jonrichards', title: 'GitHub' }
     ];
 
-    // Create a cursor element for the first command line interface element
-    const cursor1 = document.createElement('span');
-    cursor1.className = 'cursor1';
-    cursor1.textContent = '|';
-
-    // Add the cursor element to the first command line interface element and simulate typing the first command
-    let element = document.getElementById(element1);
-    if (element != null) {
-        element.innerHTML = prompt;
-        element.appendChild(cursor1);
-        await typewriterEffect(command1, element1, cursor1);
-
-        // Display the response to the first command and remove the cursor element from the first command line interface element
-        document.getElementById('response1').innerHTML = 'Jon Richards';
-        element.removeChild(cursor1);
-
-        // Create a cursor element for the second command line interface element
-        const cursor2 = document.createElement('span');
-        cursor2.className = 'cursor2';
-        cursor2.textContent = '|';
-
-        // Add the cursor element to the second command line interface element and simulate typing the second command
-        element = document.getElementById(element2);
-        element.innerHTML = prompt;
-        element.appendChild(cursor2);
-        await typewriterEffect(command2, element2, cursor2);
-
-        // Display the response to the second command and remove the cursor element from the second command line interface element
-        document.getElementById('response2').innerHTML = generateLinks(links);
-        element.removeChild(cursor2);
-
-        // Create a cursor element for the third command line interface element
-        const cursor3 = document.createElement('span');
-        cursor3.className = 'cursor3';
-        cursor3.textContent = '|';
-
-        // Add the cursor element to the third command line interface element and simulate typing the third command
-        element = document.getElementById(element3);
-        element.innerHTML = prompt;
-        element.appendChild(cursor3);
+    // Static HTML carries the final content for crawlers and no-JS users;
+    // wipe it before the animation so JS users see the typewriter from blank.
+    for (const id of ['command1', 'response1', 'command2', 'response2', 'command3']) {
+        document.getElementById(id).textContent = '';
     }
+
+    await typeCommand('command1', 'whoami');
+    document.getElementById('response1').textContent = 'Jon Richards';
+
+    await typeCommand('command2', 'ls -G');
+    const response2 = document.getElementById('response2');
+    response2.textContent = '';
+    appendLinks(response2, links);
+
+    await typeCommand('command3', '');
 })();
 
 if (typeof exports !== 'undefined') {
     module.exports = {
         sleep,
         getRandomInteger,
-        generateLinks,
+        appendLinks,
         typewriterEffect
     };
 }
